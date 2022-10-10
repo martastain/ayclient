@@ -1,4 +1,5 @@
 import os
+import socket
 
 from pydantic import BaseModel, Field, ValidationError
 from nxtools import logging, critical_error
@@ -9,7 +10,7 @@ class APIConfig(BaseModel):
     server_url: str = Field(...)
     addon_name: str = Field(...)
     addon_version: str = Field(...)
-    service_name: str = Field(...)
+    service_name: str = Field(default_factory=socket.gethostname)
 
 
 def get_api_config():
